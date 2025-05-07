@@ -31,6 +31,13 @@ Fekete:\n
 - ......
 - Ha a betűnk nem volt zöld/sárga, akkor kitöröljük az összes olyan szót, amiben van ilyen betű.
 
+Ezután megismételjük a 2.lépést a megmaradó szólistából.
+
 ## Játék a géppel
 Első lépésként mindenféleképpen futassuk le a SzoFilterezes.py-t, hogy a main.py tudja, hogy melyik szavakkal játszon.
-Ezután futassuk le a main.py programot, ez magadja nekünk az első tippet, amivel érdemes próbálkoznunk. Ezután a mi feladatunk visszajelzést adni a tippről. Ezt a következőképpen tehetjük meg: 
+Ezután futassuk le a main.py programot, ez magadja nekünk az első tippet, amivel érdemes próbálkoznunk. Ezután a mi feladatunk visszajelzést adni a tippről. Ezt a következőképpen tehetjük meg:  <index>:<szín> formában adjuk meg a válaszünkat, ahol a szín 'f' : fekete, 's' sárga vagy 'z' zöld lehet vesszővel elválasztva. Például: 1:f, 2:s, 3:f, 4:z, 5:f.
+Miután megkapta a program a visszajelzésünket, újból ad egy tippet, amire szintén hasonló módon visszajelzést kell adnunk. Ezt addig ismételi, amíg ki nem találja a szót.
+
+## Példa
+Több szóra is lefuttatuk az algoritmust, és eddig mindig kitalálta. Például a szöszke szóra is. Erre így nézett ki a játék: ........
+
