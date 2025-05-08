@@ -89,46 +89,52 @@ class KarakterGyakorisag:
   def karakter(self):
     return self._karakter
 
-
 class Megoldo:
 
+# Megadja még melyik szavak lehetséges emgoldások.
   def __init__(self, szavak=List[List[str]]):
-    self._lehetsegesSzavak = szavak
+    self._lehetsegesSzavak = szavak # Megadja melyik szavak potenciális megoldások. (Ez egy lista, amelyben minden szó listaként van tárolva.)
     self.feketek = list()
     self.sargak = list()
     self.zoldek = list()
-
+# Megadja a még lehetséges szavak számát.
   def szavakSzama(self) -> int:
     return len(self._lehetsegesSzavak)
 
+# Megszámolja, hogy az adott indexű pozícióban milyen gyakran fordulnak elő az egyes karaktereka megadott szavak listájában
   def indexbeliGyakoriság(self, szavak: List[List[str]], index: int) -> Dict[str, int]:
-    dict = defaultdict(int)
-    for szo in szavak:
-      karakter = szo[index]
-      dict[karakter] = dict[karakter] + 1
+    dict = defaultdict(int) # Szótárban tároljuk el az adott betűk adott helyen vett gyakoriságát
+    for szo in szavak: # Végigmegyünk a szólistán.
+      karakter = szo[index] # Megnézzük a rögzített indexen milyen karakter van a szóban.
+      dict[karakter] = dict[karakter] + 1 # A talált karakter előfordulásainak számát eggyel növeljük.
     return dict
-
+  
+# Kiválasztja a legjobb szót a jelenlegi lehetséges szavak közül. A kiválasztás alapja, hogy minden szó esetén kiszámolja az egyes betűk helyi előfordulási gyakoriságát, majd ezek összegét veszi "gyakorisági számként". A legmagasabb összegű szó lesz a legjobb tipp.
   def legJobbSzo(self) -> {List[str], int}:
+   # Létrehozunk egy listát, amely minden pozícióra (0-4) tartalmazza az adott pozícióban előforduló betűk gyakoriságát a jelenlegi lehetséges szavak között.
     indexBeliGyakorisagok = list()
+    # Meghívjuk az indexbeliGyakoriság metódust, amely visszaad egy szótárt, hogy az i-edik pozícióban milyen betűk és milyen gyakorisággal fordulnak elő.
     for i in range(0, 5):
       indexBeliGyakorisagok.append(self.indexbeliGyakoriság(self._lehetsegesSzavak, i))
-      legjobbSzo = None
-      legjobbSzoGyakorisag = 0
+      legjobbSzo = None #Legjobb szó betűlistaként.
+      legjobbSzoGyakorisag = 0 #A legjobb szóhoz tartozó gyakorisági érték.
 
+# Végigiterálunk az összes jelenleg lehetséges szón, hogy kiválasszuk azt, amelyik a legmagasabb "gyakorisági értékkel" rendelkezik.
     for szo in self._lehetsegesSzavak:
-      szoErtek = 0
+      szoErtek = 0 # A szó értékét itt számoljuk ki, azaz az összes betű helyi gyakoriságának összegét.
       karakterIndex = 0
       while karakterIndex < karakterLimit:
-        karakter = szo[karakterIndex]
-        indexbeliGyakorisag = indexBeliGyakorisagok[karakterIndex]
-        abszolutGyakorisag = indexbeliGyakorisag[karakter]
-        szoErtek += abszolutGyakorisag
+        karakter = szo[karakterIndex] # Az aktuális betű a szóban
+        indexbeliGyakorisag = indexBeliGyakorisagok[karakterIndex] # Az adott pozíció betűgyakoriságai
+        abszolutGyakorisag = indexbeliGyakorisag[karakter] # Az adott betű előfordulási száma az adott pozícióban
+        szoErtek += abszolutGyakorisag # Hozzáadjuk a szó értékéhez
 
+ # Ha a jelenlegi szó értéke nagyobb, mint a korábbi legjobb szó értéke, akkor frissítjük a legjobb szót és annak értékét.
         if legjobbSzoGyakorisag < szoErtek:
           legjobbSzo = szo
           legjobbSzoGyakorisag = szoErtek
         karakterIndex += 1
-
+# Visszaadjuk a legjobb szót és annak gyakorisági értékét.
     return legjobbSzo, legjobbSzoGyakorisag
     
   # A következő függvénnyel a kapott válasz alapján kizárjuk a már nem lehetséges szavakat.
