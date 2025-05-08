@@ -3,6 +3,47 @@ from os.path import split
 from typing import List, Dict
 from SzoFilterezes import *
 
+# Ez az osztály egyetlen visszajelzést reprezentál a Szózatjátékból, azaz egy adott betű helyét és színét (visszajelzését) tárolja egy próbálkozásban.
+class Valasz:
+  # Konstruktor, ami egy "<index>:<szin>" formátumú stringből hozza létre az objektumot. Tehát például a "1:f" válaszrészletből index=0 (0-alapú), szin='f' (fekete) lesz.
+  def __init__(self, index: int, szin: str, betu:str):
+    self._index = index
+    self._szin = szin
+    self._betu = betu
+
+  def __init__(self, repr: str):
+    split = repr.split(':')
+    self._index = int(split[0].strip())-1 # Indexet 0-tól fogjuk számolni, de a bemenet 1-től megy, ezért ki kell egyet vonni.
+    self._szin = split[1].strip() # "z", "s" vagy "f" lehet.
+
+  @property
+  def index(self):
+    return self._index
+
+  @property
+  def szin(self):
+    return self._szin
+
+  @property
+  def betu(self):
+    return self._betu
+
+  def megadBetu(self, betu: str):
+    self._betu = betu
+
+  def zold(self) -> bool:
+    return self._szin == 'z'
+
+  def sarga(self) -> bool:
+    return self._szin == 's'
+
+  def fekete(self) -> bool:
+    return self._szin == 'f'
+
+  def __repr__(self):
+    return f'{self._index}:{self._szin}:{self._betu}'
+
+
 karakterLimit = 5
 
 
