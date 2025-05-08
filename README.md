@@ -46,5 +46,6 @@ Több szóra is lefuttatuk az algoritmust, és eddig mindig kitalálta. Példáu
 2. tipp: kicsal, visszajelzés: 1:z, 2:f, 3:f, 4:f, 5:z <br>
 3. tipp: koszol, visszajelzés: 1:z, 2:z, 3:f, 4:f, 5:z <br>
 4. tipp: komál, visszajelzés: 1:z, 2:z, 3:z, 4:z, 5:z <br>
+
 Így az algoritmus helyesen kitalálta a "komál" szót is.
 
