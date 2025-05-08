@@ -16,47 +16,57 @@ class Valasz:
     self._index = int(split[0].strip())-1 # Indexet 0-tól fogjuk számolni, de a bemenet 1-től megy, ezért ki kell egyet vonni.
     self._szin = split[1].strip() # "z", "s" vagy "f" lehet.
 
+# Visszaadja a betű helyét a szóban (0-tól indul)
   @property
   def index(self):
     return self._index
 
+ # Visszaadja a visszajelzés színét ('z', 's' vagy 'f')
   @property
   def szin(self):
     return self._szin
 
+# Visszaadja a betűt, amelyhez a visszajelzés tartozik (utólag beállítható a megadBetu által).
   @property
   def betu(self):
     return self._betu
 
+# Beállítja a betűt az objektumban (pl. a tippelt szó adott betűjét)
   def megadBetu(self, betu: str):
     self._betu = betu
 
+# Visszaadja, hogy a visszajelzés zöld-e
   def zold(self) -> bool:
     return self._szin == 'z'
 
+# Visszaadja, hogy a visszajelzés sárga-e
   def sarga(self) -> bool:
     return self._szin == 's'
 
+# Visszaadja, hogy a visszajelzés fekete-e
   def fekete(self) -> bool:
     return self._szin == 'f'
 
+# <index>:<szín>:<betű> formában kíírja a visszajelzés alapján, amit tudunk.
   def __repr__(self):
     return f'{self._index}:{self._szin}:{self._betu}'
 
-
+# A játékban használt szavak hossza.
 karakterLimit = 5
 
-
+# A bemenetként kapott visszajelzés stringet ("1:f, 2:s, ...") átalakítja egy Valasz objektumokat tartalmazó listává, amelyek tartalmazzák az indexet, a visszajelzés színét és a tippelt szó megfelelő betűjét.
 def bemenetKonvertalas(tipp: List[str], bemenet: str) -> List[Valasz]:
+  # tipp: jelenleg tippelt szó betűinek listája.
+  # bemenet: általunk adott visszajelzés.
   split = bemenet.split(',')
   valaszok = list()
   for s in split:
-    valasz = Valasz(s)
-    betu = tipp[valasz.index]
-    valasz.megadBetu(betu)
-    valaszok.append(valasz)
+    valasz = Valasz(s) # Létrehozzuk a Valasz objektumot az adott részletből
+    betu = tipp[valasz.index] # Kikeressük a tippelt szó megfelelő betűjét
+    valasz.megadBetu(betu) # Beállítjuk a Valasz objektumban a betűt
+    valaszok.append(valasz) # Hozzáadjuk a válaszok listájához
   return valaszok
-
+# Visszakapunk: Valasz objektumok listája, melyek tartalmazzák a pozíciót, színt és betűt.
 
 class KarakterGyakorisag:
   def __init__(self, karakter: str, aboszolutGyakorisag: int, populacio: int):
