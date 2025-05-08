@@ -224,22 +224,30 @@ class Megoldo:
     return len(self._lehetsegesSzavak) == 1
 
 
+#Megadjuk a szólistát a soBetoltes segítségével
 szavak = szoBetoltes()
 
 # wordl = Wordl(szavak)
 # wordl.kerdes('a', 'b', 'c', 'd', 'e')
 
+# Megoldó példány létrehozása a szavak listájával
 megoldo = Megoldo(szavak)
+
+# Maximum 8 próbálkozásig futtatjuk a játékot
 for i in range(1, 9):
+   # Kiválasztjuk a legjobb tippet a jelenlegi lehetséges szavak alapján
   tipp = megoldo.legJobbSzo()
+  
+  # Bekérjük a felhasználótól a visszajelzést a tippre
   valaszString = input(
     f"Kérlek add meg a válaszodat a tippemre={tipp[0]}, tipp szám={i}, lehetséges szavak száma={megoldo.szavakSzama()}.\n"
     f"Kérlek használd a következő formát "
     f"<index>:<szín> ahol a szín 'f' : fekete, 's' sárga vagy 'z' zöld lehet vesszővel elválasztva. "
     f"Például: 1:f, 2:s, 3:f, 4:z, 5:f\n")
 
-  valaszok = bemenetKonvertalas(tipp[0], valaszString)
-  megoldo.valaszFeldolgozas(valaszok)
+  valaszok = bemenetKonvertalas(tipp[0], valaszString)  # A beérkezett válasz stringet átalakítjuk Valasz objektumok listájává, amelyek tartalmazzák a pozíciót, színt és a tippelt szó megfelelő betűjét
+  megoldo.valaszFeldolgozas(valaszok) # Feldolgozzuk a visszajelzést, azaz szűrjük a lehetséges szavakat a kapott információk alapján
+  # Ha már csak egyetlen lehetséges szó maradt, kiírjuk a megoldást és kilépünk
   if megoldo.csakEgyTipp():
     print(f"A megoldás szerintem={megoldo.legJobbSzo()}")
     exit()
