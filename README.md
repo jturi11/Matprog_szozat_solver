@@ -31,8 +31,9 @@ Sárgák:<br>
 - Mindneképp eltávolítjuk az összes olyan szót, ahol a sárga betű helyén az a betű szerepel<br>
 
 Fekete:<br>
-- Ha egy betű fekete, de benne van a "zöld" vagy "sárga abc"-ben (vagy mindkettőben), akkor pontosan annyiszor kell előfordulnia ahányszor ebben a két "abc"-ben megjelenik. Így kizárjuk az összes olyan szót ahol a betű nem ennyiszer  szerepel.
-- Ha a betűnk nem volt zöld/sárga, akkor kitöröljük az összes olyan szót, amiben van ilyen betű.<br>
+- Ha egy betű fekete, de benne van a "zöld" vagy "sárga abc"-ben (vagy mindkettőben), akkor pontosan annyiszor kell előfordulnia ahányszor ebben a két "abc"-ben megjelenik. Így kizárjuk az összes olyan szót ahol a betű nem ennyiszer szerepel.
+- Ha a betűnk nem volt zöld/sárga, akkor kitöröljük az összes olyan szót, amiben van ilyen betű.
+- Mindenképp eltávolítjuk az összes olyan szót, ahol a fekete betű helyén az a betű szerepel. <br>
 
 Ezután megismételjük a 2.lépést a megmaradó szólistából.
 
