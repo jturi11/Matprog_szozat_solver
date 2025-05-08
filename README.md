@@ -16,7 +16,7 @@ Második lépésként az algoritmusunknak ki kell találnia, hogy melyik szavat 
 
 Hogyan határozzuk meg a tökéletes szót?<br>
 
-Minden egyes helyiértékre (1,2,3,4,5) minden betűre meghatározzuk, hogy hányszor fordul elő egy betű az adott helyen. Ezek alapján minden szónak kiszámoljuk a "gyakorisági számát" úgy, hogy minden betűjének az adott helyen vett előfordulási számát összeadjuk. A legmagasabb "gyakorisági számú" szót választjuk. Az így kapott szót fogjuk első tippként megadni a Szózat játék során.
+Minden egyes helyiértékre (1,2,3,4,5) minden betűre meghatározzuk, hogy hányszor fordul elő egy betű az adott helyen, és a teljes szószám alapján vesszük a relatív gyakoriságot. Ezek alapján minden szónak kiszámoljuk a "relatívgyakorisági számát" úgy, hogy minden betűjének az adott helyen vett relatív gyakoriságát összeadjuk. A legmagasabb "relatívgyakorisági számú" szót választjuk. Az így kapott szót fogjuk első tippként megadni a Szózat játék során.
 
 ### 3. lépés:
 A visszajelzés alapján kizárjuk már nem megfelelő szavakat.
@@ -41,5 +41,10 @@ Ezután futassuk le a main.py programot, ez magadja nekünk az első tippet, ami
 Miután megkapta a program a visszajelzésünket, újból ad egy tippet, amire szintén hasonló módon visszajelzést kell adnunk. Ezt addig ismételi, amíg ki nem találja a szót.
 
 ## Példa
-Több szóra is lefuttatuk az algoritmust, és eddig mindig kitalálta. Például a szöszke szóra is. Erre így nézett ki a játék: ........
+Több szóra is lefuttatuk az algoritmust, és eddig mindig kitalálta. Például a szöszke szóra is, vagy a játék névadójára, a szózat szóra is. Illetve kipróbáltuk a mai (05.08) szóra is, erre így nézett ki a játék: 
+1. tipp: keres, visszajelzés: 1:z, 2:f, 3:f, 4:f, 5:f <br>
+2. tipp: kicsal, visszajelzés: 1:z, 2:f, 3:f, 4:f, 5:z <br>
+3. tipp: koszol, visszajelzés: 1:z, 2:z, 3:f, 4:f, 5:z <br>
+4. tipp: komál, visszajelzés: 1:z, 2:z, 3:z, 4:z, 5:z <br>
+Így az algoritmus helyesen kitalálta a "komál" szót is.
 
