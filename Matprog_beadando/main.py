@@ -68,19 +68,23 @@ def bemenetKonvertalas(tipp: List[str], bemenet: str) -> List[Valasz]:
   return valaszok
 # Visszakapunk: Valasz objektumok listája, melyek tartalmazzák a pozíciót, színt és betűt.
 
+# Egy adott karakter előfordulási gyakoriságát tárolja, az épp aktuális szólistára nézve.
 class KarakterGyakorisag:
   def __init__(self, karakter: str, aboszolutGyakorisag: int, populacio: int):
     self._karakter = karakter
     self._abszolutGyakorisag = aboszolutGyakorisag
     self._populacio = populacio
-
+    
+  # Visszaad egy stringet, ami a karaktert és annak relatív gyakoriságát mutatja
   def __repr__(self):
     return f'{self._karakter}:{self.relativGyakorisag()}'
 
+  # Kiszámolja és visszaadja a karakter relatív gyakorliságát a populációhoz képest
   @property
   def relativGyakorisag(self):
     return self._abszolutGyakorisag / self._populacio
 
+  # Visszaadja a karaktert
   @property
   def karakter(self):
     return self._karakter
