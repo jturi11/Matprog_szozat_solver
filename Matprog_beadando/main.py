@@ -2,7 +2,6 @@ from collections import defaultdict
 from os.path import split
 from typing import List, Dict
 from SzoFilterezes import *
-from wordl import Jatek as Wordl, Valasz
 
 karakterLimit = 5
 
