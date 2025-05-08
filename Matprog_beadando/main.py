@@ -130,12 +130,13 @@ class Megoldo:
         karakterIndex += 1
 
     return legjobbSzo, legjobbSzoGyakorisag
-
+    
+  # A következő függvénnyel a kapott válasz alapján kizárjuk a már nem lehetséges szavakat.
   def valaszFeldolgozas(self, valaszok: List[Valasz]):
     zoldek = list()
     sargak = list()
     feketek = list()
-
+    # Az új válaszban szereplő betűket színük alapján 3 listába szedjük.
     for valasz in valaszok:
       if valasz.zold():
         zoldek.append(valasz)
@@ -143,20 +144,21 @@ class Megoldo:
         sargak.append(valasz)
       elif valasz.fekete():
         feketek.append(valasz)
-
+        
+    # Kizárunk minden olyan szót a lehetséges szavak listájából, ahol egy kapott zöld betű helyén nem az a betű szerepel.
     for zold in zoldek:
       index = 0
       while index < len(self._lehetsegesSzavak):
         vizsgaltSzo = self._lehetsegesSzavak[index]
         vizsgaltBetu = vizsgaltSzo[zold.index]
         if vizsgaltBetu == zold.betu:
-          index += 1
+          index += 1 # a megmaradt szólistában is egymást követik így az indexek
         else:
           self._lehetsegesSzavak.pop(index)
 
     for sarga in sargak:
       index = 0
-      # sárga helyen nem lehet az a betű
+      # A sárga helyen nem lehet az a betű, kizárjuk azokat a szavakat, ahol ott van.
       betu = sarga.betu
       while index < len(self._lehetsegesSzavak):
         vizsgaltSzo = self._lehetsegesSzavak[index]
@@ -165,23 +167,27 @@ class Megoldo:
           self._lehetsegesSzavak.pop(index)
         else:
           index += 1
-      # a sárgák + zöldek száma >= a betű előfordulása a szóban
+          
+      # a sárgák + zöldek száma >= a betű előfordulása a szóban, kizárjuk a szavakat ahol ez nem teljesül
+      # tehát kizárjuk ahol nincs a sárga betű vagy kevesebbszer fordul elő, mint kén
       index = 0
       while index < len(self._lehetsegesSzavak):
         vizsgaltSzo = self._lehetsegesSzavak[index]
-        countLimit = 0
+        countLimit = 0  # adott sárga betű eddigi ismert előfordulását számoljuk
         for zold in zoldek:
           if zold.betu == betu:
-            countLimit += 1
+            countLimit += 1 # ez a betű zöld-e egy másik helyen
         for sarga2 in sargak:
           if sarga2.betu == betu:
-            countLimit += 1
+            countLimit += 1 # ez a betű sárga-e egy másik helyen is
         count = vizsgaltSzo.count(betu)
         if count < countLimit:
           self._lehetsegesSzavak.pop(index)
         else:
           index += 1
 
+    # Ha egy betű fekete, akkor pontosan annyiszor szerepelhet ahányszor eddig sárgaként vagy zöldként szerepel
+    # Kizárjuk azokat a szavakat ahol nem ennyiszer szerepel a fekete betű
     for fekete in feketek:
       index = 0
       while index < len(self._lehetsegesSzavak):
@@ -190,15 +196,16 @@ class Megoldo:
         betu = fekete.betu
         for zold in zoldek:
           if zold.betu == betu:
-            countLimit += 1
+            countLimit += 1 # ez a betű zöld-e egy másik helyen
         for sarga in sargak:
           if sarga.betu == betu:
-            countLimit += 1
+            countLimit += 1 # ez a betű sárga-e egy másik helyen
         if vizsgaltSzo.count(betu) == countLimit:
           index += 1
         else:
           self._lehetsegesSzavak.pop(index)
 
+  #van-e egynél több lehetséges megoldás (ha nincs, kitaláltuk a szót)
   def csakEgyTipp(self) -> bool:
     return len(self._lehetsegesSzavak) == 1
 
