@@ -193,18 +193,10 @@ class Megoldo:
           index += 1
           
     for fekete in feketek:
-      # A fekete helyen nem lehet az a betű, kizárjuk azokat a szavakat, ahol ott van
       index = 0
-      betu = fekete.betu
-      while index < len(self._lehetsegesSzavak):
-        vizsgaltSzo = self._lehetsegesSzavak[index]
-        vizsgaltBetu = vizsgaltSzo[fekete.index]
-        if vizsgaltBetu == betu:
-          self._lehetsegesSzavak.pop(index)
-        else:
-          index += 1
       # Ha egy betű fekete, akkor pontosan annyiszor szerepelhet ahányszor eddig sárgaként vagy zöldként szerepel
       # Kizárjuk azokat a szavakat ahol nem ennyiszer szerepel a fekete betű
+      betu = fekete.betu
       while index < len(self._lehetsegesSzavak):
         vizsgaltSzo = self._lehetsegesSzavak[index]
         countLimit = 0
@@ -218,6 +210,15 @@ class Megoldo:
           index += 1
         else:
           self._lehetsegesSzavak.pop(index)
+      # A fekete helyen nem lehet az a betű, kizárjuk azokat a szavakat, ahol ott van
+      index = 0
+      while index < len(self._lehetsegesSzavak):
+        vizsgaltSzo = self._lehetsegesSzavak[index]
+        vizsgaltBetu = vizsgaltSzo[fekete.index]
+        if vizsgaltBetu == betu:
+          self._lehetsegesSzavak.pop(index)
+        else:
+          index += 1
   
   #van-e egynél több lehetséges megoldás (ha nincs, kitaláltuk a szót)
   def csakEgyTipp(self) -> bool:
